@@ -3,54 +3,109 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Protocol Hadassah</title>
+    <title>Protocol Hadassah - Full Version</title>
     <style>
         :root { --pink: #ff69b4; --glow: #ff1493; }
-        body, html { margin: 0; padding: 0; width: 100%; height: 100%; background: #000; overflow: hidden; font-family: sans-serif; }
+        body, html { margin: 0; padding: 0; width: 100%; height: 100%; background: #000; overflow: hidden; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
         canvas { position: fixed; top: 0; left: 0; }
         #matrix-canvas { z-index: 1; opacity: 0.6; }
         #particle-canvas { z-index: 2; pointer-events: none; }
         #ui { position: relative; z-index: 10; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; }
-        #birthday-text { color: var(--pink); font-size: 4rem; text-align: center; display: none; text-shadow: 0 0 20px var(--glow); font-weight: bold; }
-        #big-heart { display: none; font-size: 150px; color: var(--pink); text-shadow: 0 0 30px var(--glow); animation: p 1.5s infinite; }
-        @keyframes p { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.2); } }
-        .card { position: absolute; width: 90%; max-width: 900px; background: rgba(0,0,0,0.8); backdrop-filter: blur(10px); border: 2px solid var(--pink); border-radius: 15px; padding: 20px; display: none; flex-direction: row; align-items: center; gap: 20px; box-shadow: 0 0 30px rgba(255,20,147,0.3); }
+        
+        #birthday-text { color: var(--pink); font-size: 5rem; text-align: center; display: none; text-shadow: 0 0 20px var(--glow); font-weight: 900; line-height: 1.2; }
+        #big-heart { display: none; font-size: 180px; color: var(--pink); text-shadow: 0 0 30px var(--glow); animation: pulse 1.5s infinite; }
+        @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.2); } }
+
+        .card { position: absolute; width: 90%; max-width: 950px; background: rgba(15, 0, 8, 0.85); backdrop-filter: blur(12px); border: 2px solid var(--pink); border-radius: 20px; padding: 30px; display: none; flex-direction: row; align-items: center; gap: 30px; box-shadow: 0 0 40px rgba(255,20,147,0.4); transition: opacity 1s; }
         .photo-side { width: 45%; }
-        .photo-side img { width: 100%; border-radius: 8px; border: 1px solid #fff; }
-        .poem-side { width: 55%; color: #fff; font-size: 1.2rem; font-style: italic; line-height: 1.4; }
-        #curtain { position: fixed; top: -100%; left: 0; width: 100%; height: 100%; background: #000; z-index: 1000; transition: top 3s ease-in-out; }
+        .photo-side img { width: 100%; border-radius: 12px; border: 2px solid #fff; box-shadow: 0 0 15px var(--glow); }
+        .poem-side { width: 55%; color: #fff; font-size: 1.5rem; font-style: italic; line-height: 1.6; white-space: pre-line; text-shadow: 2px 2px 4px #000; }
+        
+        #curtain { position: fixed; top: -100%; left: 0; width: 100%; height: 100%; background: #000; z-index: 1000; transition: top 3s cubic-bezier(0.4, 0, 0.2, 1); }
     </style>
 </head>
 <body>
     <canvas id="matrix-canvas"></canvas>
     <canvas id="particle-canvas"></canvas>
     <div id="curtain"></div>
+
     <div id="ui">
         <div id="birthday-text"></div>
         <div id="big-heart">❤</div>
-        <div class="card" id="c1"><div class="photo-side"><img src="photo1.jpg"></div><div class="poem-side">1. Lumière douce...<br>Hadassah, prénom de reine,<br>Cœur bienveillant...</div></div>
-        <div class="card" id="c2"><div class="photo-side"><img src="photo2.jpg"></div><div class="poem-side">2. Courage en soie...<br>Sous ton sourire...</div></div>
-        <div class="card" id="c3"><div class="photo-side"><img src="photo3.jpg"></div><div class="poem-side">3. Le sourire...<br>Hadassah, quand tu souris...</div></div>
-        <div class="card" id="c4"><div class="photo-side"><img src="photo4.jpg"></div><div class="poem-side">4. Pour ton jour...<br>Joyeux anniversaire !</div></div>
+
+        <div class="card" id="c1">
+            <div class="photo-side"><img src="photo1.jpg" alt="H1"></div>
+            <div class="poem-side"><b>1. Lumière douce</b>
+            Hadassah, prénom de reine,  
+            Cœur bienveillant qui nous entraîne.  
+            Gentille et classe sans effort,  
+            Ton courage est notre plus beau port.</div>
+        </div>
+
+        <div class="card" id="c2">
+            <div class="photo-side"><img src="photo2.jpg" alt="H2"></div>
+            <div class="poem-side"><b>2. Courage en soie</b>
+            Sous ton sourire le monde s’éclaire,  
+            Bienveillante même dans la galère.  
+            Hadassah, élégante et forte à la fois,  
+            Tu transformes chaque jour en émoi.</div>
+        </div>
+
+        <div class="card" id="c3">
+            <div class="photo-side"><img src="photo3.jpg" alt="H3"></div>
+            <div class="poem-side"><b>3. Le sourire</b> 
+            Hadassah, quand tu souris,  
+            Même le ciel devient moins gris.  
+            Classe, vaillante, douce lueur,  
+            Tu mets de la grâce dans nos cœurs.</div>
+        </div>
+
+        <div class="card" id="c4">
+            <div class="photo-side"><img src="photo4.jpg" alt="H4"></div>
+            <div class="poem-side"><b>4. Pour ton jour</b>  
+            Aujourd’hui le monde célèbre toi :  
+            La bienveillance au bout des doigts,  
+            Le courage droit, l’élégance vraie,  
+            Et ce sourire qui jamais ne s’en va.  
+            Joyeux anniversaire, Hadassah.</div>
+        </div>
     </div>
+
 <script>
+    // Matrix Script
     const mC = document.getElementById('matrix-canvas');
     const m = mC.getContext('2d');
     mC.width = window.innerWidth; mC.height = window.innerHeight;
     const drops = Array(Math.floor(mC.width/18)).fill(1);
-    function dM() {
+    function drawM() {
         m.fillStyle = 'rgba(0,0,0,0.1)'; m.fillRect(0,0,mC.width,mC.height);
         m.fillStyle = '#ff69b4'; m.font = '18px monospace';
         drops.forEach((y, i) => {
-            m.fillText("HADASSAH"[Math.floor(Math.random()*8)], i*18, y*18);
-            if(y*18 > mC.height && Math.random() > 0.975) drops[i] = 0;
+            const char = "HADASSAH♥"[Math.floor(Math.random()*9)];
+            m.fillText(char, i*18, y*18);
+            if(y*18 > mC.height && Math.random() > 0.98) drops[i] = 0;
             drops[i]++;
         });
     }
-    setInterval(dM, 50);
+    setInterval(drawM, 50);
 
+    // Particles (Hearts & Stars)
+    const pC = document.getElementById('particle-canvas');
+    const p = pC.getContext('2d');
+    pC.width = window.innerWidth; pC.height = window.innerHeight;
+    let parts = [];
+    class Part {
+        constructor() { this.x = Math.random()*pC.width; this.y = Math.random()*pC.height; this.v = Math.random()*1+0.5; this.s = Math.random()*15+10; this.t = Math.random()>0.5?"❤":"✦"; }
+        draw() { p.fillStyle="#ff69b4"; p.font=this.s+"px serif"; p.fillText(this.t,this.x,this.y); }
+        update() { this.y-=this.v; if(this.y<0)this.y=pC.height; }
+    }
+    for(let i=0;i<50;i++) parts.push(new Part());
+    function anim() { p.clearRect(0,0,pC.width,pC.height); parts.forEach(x=>{x.update();x.draw();}); requestAnimationFrame(anim); }
+    anim();
+
+    // Timeline
     const wait = ms => new Promise(r => setTimeout(r, ms));
-    async function run() {
+    async function start() {
         await wait(4000);
         const bt = document.getElementById('birthday-text');
         bt.style.display = "block";
@@ -60,13 +115,16 @@
         await wait(2000); bt.style.display = "none";
         const h = document.getElementById('big-heart');
         h.style.display = "block"; await wait(2000); h.style.display = "none";
+        
         for(let i=1; i<=4; i++) {
             const c = document.getElementById('c'+i);
-            c.style.display = "flex"; await wait(10000); c.style.display = "none";
+            c.style.display = "flex"; await wait(10000); 
+            c.style.opacity = "0"; await wait(1000); c.style.display = "none";
         }
+        await wait(2000);
         document.getElementById('curtain').style.top = "0";
     }
-    run();
+    start();
 </script>
 </body>
 </html>
